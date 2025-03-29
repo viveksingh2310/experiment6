@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Destination Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            background: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Holiday Destination Survey</h2>
+        <form id="surveyForm">
+            <label for="favorite_destination">What is your favorite holiday destination?</label>
+            <select id="favorite_destination" name="favorite_destination" required>
+                <option value="beach">Beach</option>
+                <option value="mountains">Mountains</option>
+                <option value="city">City Tour</option>
+                <option value="historical">Historical Sites</option>
+                <option value="wildlife">Wildlife Safari</option>
+            </select>
+            
+            <label for="planning">Where are you planning to go next?</label>
+            <select id="planning" name="planning" required>
+                <option value="beach">Beach</option>
+                <option value="mountains">Mountains</option>
+                <option value="city">City Tour</option>
+                <option value="historical">Historical Sites</option>
+                <option value="wildlife">Wildlife Safari</option>
+            </select>
+            
+            <label for="recommendation">What would you recommend to others?</label>
+            <select id="recommendation" name="recommendation" required>
+                <option value="beach">Beach</option>
+                <option value="mountains">Mountains</option>
+                <option value="city">City Tour</option>
+                <option value="historical">Historical Sites</option>
+                <option value="wildlife">Wildlife Safari</option>
+            </select>
+            
+            <label for="itinerary_preference">What do you like the most in an itinerary?</label>
+            <select id="itinerary_preference" name="itinerary_preference" required>
+                <option value="adventure">Adventure Activities</option>
+                <option value="relaxation">Relaxation</option>
+                <option value="sightseeing">Sightseeing</option>
+                <option value="food">Local Cuisine</option>
+                <option value="culture">Cultural Experience</option>
+            </select>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = {
+                favorite_destination: document.getElementById('favorite_destination').value,
+                planning: document.getElementById('planning').value,
+                recommendation: document.getElementById('recommendation').value,
+                itinerary_preference: document.getElementById('itinerary_preference').value
+            };
+            
+            fetch('https://your-api-endpoint.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => alert('Survey submitted successfully!'))
+            .catch(error => alert('Error submitting survey: ' + error));
+        });
+    </script>
+</body>
+</html>

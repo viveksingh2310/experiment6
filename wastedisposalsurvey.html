@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Disposal Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            background: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Waste Disposal Survey</h2>
+        <form id="surveyForm">
+            <label for="frequency">How often do you dispose of waste in a dustbin?</label>
+            <select id="frequency" name="frequency" required>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="occasionally">Occasionally</option>
+            </select>
+            
+            <label for="bin_color">Which color of dustbin do you use the most?</label>
+            <select id="bin_color" name="bin_color" required>
+                <option value="green">Green (Biodegradable Waste)</option>
+                <option value="blue">Blue (Dry Waste)</option>
+                <option value="red">Red (Hazardous Waste)</option>
+                <option value="yellow">Yellow (Medical Waste)</option>
+            </select>
+            
+            <label for="awareness">Are you aware of the different types of dustbins and their purpose?</label>
+            <select id="awareness" name="awareness" required>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            
+            <label for="suggestions">Any suggestions for improving waste disposal habits?</label>
+            <input type="text" id="suggestions" name="suggestions">
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = {
+                frequency: document.getElementById('frequency').value,
+                bin_color: document.getElementById('bin_color').value,
+                awareness: document.getElementById('awareness').value,
+                suggestions: document.getElementById('suggestions').value
+            };
+            
+            fetch('https://your-api-endpoint.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => alert('Survey submitted successfully!'))
+            .catch(error => alert('Error submitting survey: ' + error));
+        });
+    </script>
+</body>
+</html>
